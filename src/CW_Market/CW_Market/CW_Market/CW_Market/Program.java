@@ -2,6 +2,9 @@ package CW_Market;
 
 import java.util.Scanner;
 
+import static CW_Market.Deal.ExpDate;
+
+
 public class Program {
 
       Scanner scan = new Scanner (System.in);
@@ -23,7 +26,8 @@ public class Program {
 
     private void output() {
         for (Deal deal : deals) {
-                   System.out.println("    " + deal.getBuyer().getName() + " купил у " + deal.getSeller().getName());
+            System.out.println("Deal " + deal.getDate());
+            System.out.println("    " + deal.getBuyer().getName() + " купил у " + deal.getSeller().getName());
 
             for (Product product : deal.getProducts()) {
                 System.out.println("        " + product.getName() + " " + product.getQuantity() + " x "
@@ -32,6 +36,8 @@ public class Program {
 
             System.out.println("Итого: " + deal.getSum());
             System.out.println("----------------------------");
+            ExpDate();
+            Call.dateOfBirth();
         }
     }
 
@@ -67,13 +73,19 @@ public class Program {
     private Product inputProduct(Scanner scan) {
         System.out.println("  Введите продукт ->");
         String name = enter(scan, "    Название");
-        String cost = enter(scan, "    Стоимость");
         String qty = enter(scan, "    Количество");
+        String cost = enter(scan, "    Стоимость");
+        String type = enter(scan, "    Type");
 
         Product product = null;
 
-        switch (1) {
-
+        switch (type) {
+            case "Cat":
+                product = new Cat();
+                break;
+            case "Drugs":
+                product = new Drugs();
+                break;
             default:
                 product = new Product();
                 break;
